@@ -13,6 +13,20 @@ import pigpio
 
 
 #Recall: I did need to go into the controls.py file and edit it to function with my NES controllers
+# I need to edit it to the following: 
+
+# Joy pad
+# JOY_AXIS_X = 0
+# JOY_AXIS_Y = 1
+# JOY_BUTTON_BACK = 2
+# JOY_BUTTON_SELECT = 1
+# JOY_DEADZONE = 0.5
+# JOY_DELAY = 300  # ms
+# JOY_DOWN = (0, -1)
+# JOY_LEFT = (-1, 0)
+# JOY_REPEAT = 100  # ms
+# JOY_RIGHT = (1, 0)
+# JOY_UP = (0, 1)
 
 # initialize pygame stuff
 pygame.init()
