@@ -35,9 +35,10 @@ You should recieve a response saying:
 The program may run with later versions, but if you experience issues, 
 please install the versions we've tested the program with.  
 
-To wrap things up, we need to run two more commands (in a new terminal):
+To wrap things up, we need to run a few more commands (in a new terminal):
+	sudo pip install RPi.GPIO
 	sudo apt-get install libsdl2-mixer-2.0-0
 	sudo apt-get install python3-sdl2
 
-Without installing the above two packages, you will encounter errors
-loading the required fonts to run the game.  
+Without installing the above packages, you will encounter errors
+loading the required fonts to run the game, and running the program.  
