@@ -1,3 +1,17 @@
+## Installation Instructions
+
+# Start with a fresh install of Raspberry Pi OS (legacy, 64 bit) Debian Bullseye & Update System Packages:
+sudo apt update && sudo apt upgrade -y
+
+# Install or Upgrade pygame and pygame_menu
+pip install --upgrade --force-reinstall pygame pygame_menu
+
+# Install RPi.GPIO
+sudo pip install RPi.GPIO
+
+# Install SDL2 Dependencies
+sudo apt-get install libsdl2-mixer-2.0-0 python3-sdl2
+
 We need a pygame pygame version greater than 1.9.6, which comes standard
 on the raspberry pi as of March 2023.  Please verify that later releases
 of the pi operating system do not come standard with a suitable release of
