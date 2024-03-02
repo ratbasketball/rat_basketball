@@ -12,8 +12,8 @@ sudo pip install RPi.GPIO
 # Install SDL2 Dependencies
 sudo apt-get install libsdl2-mixer-2.0-0 python3-sdl2
 
-Without installing the above packages, you will encounter errors
-loading the required fonts to run the game, and running the program.  
+# Without installing the above packages, you will encounter errors
+# loading the required fonts to run the game, and running the program.  
 
 ## Getting the software:
 
@@ -25,3 +25,7 @@ mv rat_basketball/*.py ~/Desktop/
 
 # Clean up by removing the repository folder (optional)
 rm -rf rat_basketball
+
+## Game instructions
+# Execute the file ratbasketball.py from your desktop.  
+# Modify the controls.py file if necessary for your controller.
