@@ -166,6 +166,7 @@ def main(gameTimerMinutes, start_ticks):
         # Event processing step.
         for event in pygame.event.get():
             print(event)
+            
             if event.type == pygame.QUIT:
                 print('line 170')
                 quitGame()
@@ -188,14 +189,21 @@ def main(gameTimerMinutes, start_ticks):
                     if round(event.dict['value']) == -1 and (event.dict['axis']) == 1: #note: axis is inverted.  Please use -1 for up
                         player1Score = player1Score + 1
                         gpioOutput(1)
+                        
                     if round(event.dict['value']) == 1 and (event.dict['axis']) == 1: #note: axis is inverted.  Please use -1 for up
                         player1Score = player1Score - 1
+                        if player1Score < 0:
+                            player1Score = 0
+                            
                 if event.dict.get('joy')==1:
                     if round(event.dict['value']) == -1 and (event.dict['axis']) == 1: #note: axis is inverted.  Please use -1 for up
                         player2Score = player2Score + 1
                         gpioOutput(2)
+                        
                     if round(event.dict['value']) == 1 and (event.dict['axis']) == 1: #note: axis is inverted.  Please use -1 for up
                         player2Score = player2Score - 1
+                        if player1Score < 0:
+                            player2Score = 0
 
             # Handle hotplugging
             if event.type == pygame.JOYDEVICEADDED:
@@ -206,6 +214,7 @@ def main(gameTimerMinutes, start_ticks):
             if event.type == pygame.JOYDEVICEREMOVED:
                 del joysticks[event.instance_id]
                 print(f"Joystick {event.instance_id} disconnected")
+                
             if event.type == KEYDOWN and event.key in [K_ESCAPE, K_q,]:
                 quitGame()
 
