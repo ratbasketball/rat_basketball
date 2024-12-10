@@ -9,7 +9,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, PIN, NEO_GRB + NEO_KHZ80
 struct Panel {
   int r, g, b;           // Color
   int brightness;        // Brightness
-  unsigned long turnOffTime;  // Time at which to turn off
+  unsigned long turnOffTime;  // Time at which to turn off (0 means stay on indefinitely)
 };
 
 Panel panels[2];  // Array to hold states of two panels (panel 1 and panel 2)
@@ -44,14 +44,14 @@ void loop() {
     int numParams = sscanf(command.c_str(), "panel %d %d %d %d %d %d", &panelNum, &r, &g, &b, &brightness, &duration);
 
     // If the panel number is valid and the command is complete
-    if (numParams == 6 && panelNum >= 1 && panelNum <= 2 && r >= 0 && g >= 0 && b >= 0 && brightness >= 0 && duration >= 0) {
+    if (numParams == 6 && panelNum >= 1 && panelNum <= 2 && r >= 0 && g >= 0 && b >= 0 && brightness >= 0) {
       // Update the selected panel's state
       panelNum--; // Convert to zero-based index
       panels[panelNum].r = r;
       panels[panelNum].g = g;
       panels[panelNum].b = b;
       panels[panelNum].brightness = brightness;
-      
+
       // Set the brightness of the panel
       strip.setBrightness(brightness);
 
@@ -65,8 +65,13 @@ void loop() {
       }
       strip.show();  // Update the panels with the new color
 
-      // Set the turn-off time based on the current time and the duration
-      panels[panelNum].turnOffTime = millis() + duration;
+      // Handle duration: -1 means stay on indefinitely
+      if (duration == -1) {
+        panels[panelNum].turnOffTime = 0; // Indicate no turn-off time
+      } else {
+        // Set the turn-off time based on the current time and the duration
+        panels[panelNum].turnOffTime = millis() + duration;
+      }
     }
     else {
       // Handle invalid command
@@ -76,7 +81,7 @@ void loop() {
 
   // Check if it's time to turn off the LEDs for any panel
   for (int i = 0; i < 2; i++) {
-    if (millis() >= panels[i].turnOffTime && panels[i].turnOffTime != 0) {
+    if (panels[i].turnOffTime != 0 && millis() >= panels[i].turnOffTime) {
       // Turn off the selected panel
       if (i == 0) { // First panel: Pixels 0-63
         for (int j = 0; j < 64; j++) {
